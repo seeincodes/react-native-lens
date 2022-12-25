@@ -1,27 +1,28 @@
-import { Profiles } from '@lens-protocol/react-native-lens-ui-kit';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { LensProvider } from '@lens-protocol/react-native-lens-ui-kit';
+
+import Profiles from './Profiles'
+import ProfileView from './ProfileView';
+import ViewComments from './ViewComments';
+import ViewFollowing from './ViewFollowing';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Profiles" component={ProfileComponent} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <LensProvider theme="dark">
+      <NavigationContainer theme={DarkTheme}>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Profiles} />
+          <Stack.Screen name="ProfileView" component={ProfileView} />
+          <Stack.Screen name="ViewComments" component={ViewComments} />
+          <Stack.Screen name="ViewFollowing" component={ViewFollowing} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </LensProvider>
   );
-}
-
-function ProfileComponent({
-  navigation
-}) {
-  return (
-    <Profiles />
-  )
 }
 
 const styles = StyleSheet.create({
